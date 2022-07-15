@@ -17,10 +17,10 @@ jobs:
 
       - name: Test with unittest
         run: |
-          python3 -m unittest FILL OUT.py
+          python3 -m unittest m_tests.py
       - name: Check code coverage
         run: |
-          python3 -m coverage run -m unittest FILL OUT.py
+          python3 -m coverage run -m unittest m_tests.py
           python3 -m coverage report
           python3 -m coverage html
           
