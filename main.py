@@ -6,6 +6,22 @@ import pandas as pd
 import sqlalchemy as db
 
 
+def get_genre():
+  genre = str(input('Please input the media genre (Music, Movies, TV, or Sports)': ))
+  if genre == 'Music':
+    return genre
+  elif genre == 'Movies':
+    return genre
+  elif genre == 'TV':
+    return genre
+  elif genre == 'Sports':
+    return genre
+  else:
+    genre = str(input('Invalid genre entered. Please try again: '))
+
+def run_program():
+  genre = get_genre()
+
 """Pasting the code for movie recommendations based on movie id, we might need to change the id of a movie name/keyword
 to allow better user experience."""
 
@@ -84,3 +100,7 @@ movies = movie_entry(user_entry)['results']
 id_list = get_id_list(movies)
 print(create_database_for_movies(movies))
 print(create_database_for_providers(movies))
+
+if __name__ == '__main__':
+  run_program()
+  
