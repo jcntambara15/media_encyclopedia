@@ -10,6 +10,8 @@ if __name__ == '__main__':
   
   if genre == 'Music':
     
+  elif genre == 'Movies':
+    
   elif genre == 'TV':
   
   elif genre == 'Sports':
