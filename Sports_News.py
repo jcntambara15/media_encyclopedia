@@ -46,19 +46,26 @@ def create_url(sport) -> str:
     base_url = 'http://site.api.espn.com/apis/site/v2'
     return base_url + sport
 
-def get_response(url) -> dict:
+def get_response(url, sport) -> dict:
     """
-    Making the request to the API and returning data as a parsed json file
+    Making the request to the API and printing data for each article as parsed json file
     """
     i = 0
     request = requests.get(url).json()
     
     try:
         while i < len(request):
-            print(f"Name: {request['articles'][i]['images'][0]['name']}")
-            print(f"Description: {request['articles'][i]['images'][0]['caption']}")
-            print(f"Link: {request['articles'][i]['links']['web']['href']}")
-            print()
+            # Baseball (MLB)
+            if 'baseball' in sport:
+                print(f"Name: {request['articles'][i]['images'][0]['name']}")
+                print(f"Description: {request['articles'][i]['images'][0]['caption']}")
+                print(f"Link: {request['articles'][i]['links']['web']['href']}")
+                print()
+            # Sports 2-10 on menu
+            else:
+                print(f"Description: {request['articles'][i]['description']}")
+                print(f"Link: {request['articles'][i]['links']['web']['href']}")
+                print()
             i += 1
     except IndexError:
         print('No news for this search')
@@ -66,7 +73,7 @@ def get_response(url) -> dict:
 def main():
     sport = get_sport()
     url = create_url(sport)
-    get_response(url)
+    get_response(url, sport)
 
 if __name__ == "__main__":
     main()
