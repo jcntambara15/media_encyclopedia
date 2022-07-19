@@ -50,12 +50,23 @@ def get_response(url) -> dict:
     """
     Making the request to the API and returning data as a parsed json file
     """
-    pass
+    i = 0
+    request = requests.get(url).json()
+    
+    try:
+        while i < len(request):
+            print(f"Name: {request['articles'][i]['images'][0]['name']}")
+            print(f"Description: {request['articles'][i]['images'][0]['caption']}")
+            print(f"Link: {request['articles'][i]['links']['web']['href']}")
+            print()
+            i += 1
+    except IndexError:
+        print('No news for this search')
 
 def main():
     sport = get_sport()
     url = create_url(sport)
-    print(url)
+    get_response(url)
 
 if __name__ == "__main__":
     main()
