@@ -27,33 +27,33 @@ def get_sport():
     choice = str(input('Would you like to view real or fantasy sports today? ')).lower()
     if choice == 'real':
         real_sports = {
-            1: ['Action Sports (X Games)', '/sports/action-sports'],
-            2: ['Baseball (MLB)', '/sports/baseball/mlb'],
-            3: ['Basketball (NCAA Mens)', '/sports/basketball/mens-college-basketball'],
-            4: ['Basketball (NCAA Womens)', '/sports/basketball/womens-college-basketball'],
-            5: ['Basketball (NBA)', '/sports/basketball/nba'],
-            6: ['Basketball (WNBA)', '/sports/basketball/wnba'],
-            7: ['Boxing', '/sports/boxing'],
-            8: ['Football (NCAA)', '/sports/football/college-football'],
-            9: ['Football (NFL)', '/sports/football/nfl'],
-            10: ['Golf', '/sports/golf'],
-            11: ['Hockey (NHL)', '/sports/hockey/nhl'],
-            12: ['Horse Racing', '/sports/horse-racing'],
-            13: ['MMA', '/sports/mma'],
-            14: ['Olympic Sports', '/sports/olympics'],
-            15: ['Racing', '/sports/racing'],
-            16: ['Racing (NASCAR)', '/sports/racing/nascar'],
-            17: ['Soccer', '/sports/soccer'],
-            18: ['Tennis', '/sports/tennis']
+            1: ['Action Sports (X Games)', '/sports/action-sports/news'],
+            2: ['Baseball (MLB)', '/sports/baseball/mlb/news'],
+            3: ['Basketball (NCAA Mens)', '/sports/basketball/mens-college-basketball/news'],
+            4: ['Basketball (NCAA Womens)', '/sports/basketball/womens-college-basketball/news'],
+            5: ['Basketball (NBA)', '/sports/basketball/nba/news'],
+            6: ['Basketball (WNBA)', '/sports/basketball/wnba/news'],
+            7: ['Boxing', '/sports/boxing/news'],
+            8: ['Football (NCAA)', '/sports/football/college-football/news'],
+            9: ['Football (NFL)', '/sports/football/nfl/news'],
+            10: ['Golf', '/sports/golf/news'],
+            11: ['Hockey (NHL)', '/sports/hockey/nhl/news'],
+            12: ['Horse Racing', '/sports/horse-racing/news'],
+            13: ['MMA', '/sports/mma/news'],
+            14: ['Olympic Sports', '/sports/olympics/news'],
+            15: ['Racing', '/sports/racing/news'],
+            16: ['Racing (NASCAR)', '/sports/racing/nascar/news'],
+            17: ['Soccer', '/sports/soccer/news'],
+            18: ['Tennis', '/sports/tennis/news']
         }
         print_menu(real_sports)
         return make_choice(real_sports)
     elif choice == 'fantasy':
         fantasy_sports = {
-            1: ['Baseball', '/fantasy/baseball'],
-            2: ['Basketball', '/fantasy/basketball'],
-            3: ['Football', '/fantasy/football'],
-            4: ['Hockey', ' /fantasy/hockey']
+            1: ['Baseball', '/fantasy/baseball/news'],
+            2: ['Basketball', '/fantasy/basketball/news'],
+            3: ['Football', '/fantasy/football/news'],
+            4: ['Hockey', ' /fantasy/hockey/news']
         }
         print_menu(fantasy_sports)
         return make_choice(fantasy_sports)
@@ -65,7 +65,7 @@ def create_url(sport) -> str:
     """
     Design the url to access the News and Headlines endpoint of the API
     """
-    base_url = 'http://api.espn.com/v1'
+    base_url = 'http://site.api.espn.com/apis/site/v2'
     return base_url + sport
 
 def get_response(url) -> dict:
@@ -77,6 +77,7 @@ def get_response(url) -> dict:
 def main():
     sport = get_sport()
     url = create_url(sport)
+    print(url)
 
 if __name__ == "__main__":
     main()
