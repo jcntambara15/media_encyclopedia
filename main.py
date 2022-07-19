@@ -5,15 +5,17 @@ import json
 import pandas as pd
 import sqlalchemy as db
 
+from Movie import movie_search()
+from Tv import tv_search()
 
 def get_genre():
   genre = str(input('Please input the media genre: (Music, Movies, TV, or Sports)'))
   if genre == 'Music':
     return genre
   elif genre == 'Movies':
-    return genre
+    movie_search()
   elif genre == 'TV':
-    return genre
+    tv_search()
   elif genre == 'Sports':
     return genre
   else:
