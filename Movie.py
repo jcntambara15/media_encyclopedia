@@ -27,8 +27,26 @@ def movie_list(movie_input):
             return 'No movies for this search'
 
 def movie_database(movie_input):
+    # Query sqlite database
+    # Store in dataframe
+    # Convert dataframe to dictionary https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_dict.html
+    # Pull list of movies from Names
+    # Convert added both lists to a set()
+    # Convert the set to a list
+    # Put that list into the dataframe like normal
+    # to_sql()
     """Adding the list of movies to a database"""
     data = {"Names":movie_list(movie_input)}
+    my_data_frame = pd.DataFrame(data)
+    engine = db.create_engine('sqlite:///movies.db')
+    my_data_frame.to_sql('data', con=engine, if_exists='append', index=False)
+    col_names = ['Movie Title']
+    query_result = engine.execute("SELECT * FROM data;").fetchall()
+    return pd.DataFrame(query_result, columns = col_names)
+
+def clear_data(movie_input):
+    """Clearing the data"""
+    data = {"Names": []}
     my_data_frame = pd.DataFrame(data)
     engine = db.create_engine('sqlite:///movies.db')
     my_data_frame.to_sql('data', con=engine, if_exists='replace', index=False)
@@ -40,7 +58,7 @@ if __name__ == '__main__':
     movie_input = str(input('Search for movie or "no" to exit when prompted: '))
     while movie_input != ('no' or 'No'):
         movie_search(movie_input)
-        print(movie_list(movie_input))
         print(movie_database(movie_input))
         print('Search for another movie?')
         movie_input = str(input())
+    clear_data(movie_input)
