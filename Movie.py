@@ -2,19 +2,19 @@ import requests
 import json
 
 
-def movie_search(m):
+def movie_search(movie_input):
         i = 0
-        r = requests.get('https://api.themoviedb.org/3/search/movie?api_key=ca247a677e49a57329443e35dfc24974&language=en-US&page=1&query={}&include_adult=false'.format(m)).json()
+        request = requests.get('https://api.themoviedb.org/3/search/movie?api_key=ca247a677e49a57329443e35dfc24974&language=en-US&page=1&query={}&include_adult=false'.format(movie_input)).json()
         try:
-            while i < len(r):
-                print(r['results'][i]['original_title'])
+            while i < len(request):
+                print(request['results'][i]['original_title'], request['results'][i]['release_date'])
                 i += 1
         except IndexError:
             print('No movies for this search')
 
 if __name__ == '__main__':
-    m = str(input('Search for movie or "no" to exit when prompted: '))
-    while m != ('no' or 'No'):
-        movie_search(m)
+    movie_input = str(input('Search for movie or "no" to exit when prompted: '))
+    while movie_input != ('no' or 'No'):
+        movie_search(movie_input)
         print('Search for another movie?')
-        m = str(input())
+        movie_input = str(input())
