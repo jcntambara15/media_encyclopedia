@@ -37,7 +37,7 @@ def movie_database(movie_input):
     print(releaz)
     data = {"Names":m_list, "Release":releaz}
     my_data_frame = pd.DataFrame(data)
-    engine = db.create_engine('sqlite:///movies.db')
+    engine = db.create_engine('sqlite:///movie.db')
     my_data_frame.to_sql('data', con=engine, if_exists='append', index=False)
     col_names = ['Movie Title', 'Release']
     query_result = engine.execute("SELECT * FROM data;").fetchall()
