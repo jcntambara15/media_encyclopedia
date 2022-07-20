@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, flash, redirect
+from flask import Flask, render_template, url_for, flash, redirect, request
 from forms import RegistrationForm
 from flask_behind_proxy import FlaskBehindProxy
 from flask_sqlalchemy import SQLAlchemy
@@ -19,7 +19,7 @@ class User(db.Model):
     password = db.Column(db.String(60), nullable=False)
 
 def __repr__(self):
-    return f"User('{self.username}', '{self.email}', {self.password})"
+    return f"User('{self.username}', '{self.email}')"
 
 @app.route("/home_page")
 def home():
@@ -41,8 +41,20 @@ def register():
             user = User(username=form.username.data, email=form.email.data, password=form.password.data)
             db.session.add(user)
             db.session.commit()
-        flash(f'Account created for {form.username.data}!, go to Sign In page to log in', 'success')
-        return redirect(url_for('home')) # if so - send to home page
+        flash(f'Account created for {form.username.data}! go to Sign In page to log in', 'success')
+        return redirect(url_for('home_page')) # if so - send to home page
     return render_template('register.html', title='Register', form=form)
+
+# Route for handling the login page logic
+@app.route('/sign_in', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            return redirect(url_for('home'))
+    return render_template('login.html', error=error)
+
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
