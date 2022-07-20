@@ -1,8 +1,8 @@
 import requests
 import os
+import json
 
-#set up environmental variables in terminal
-#
+
 CLIENT_ID = os.environ.get('SPOTIFY_CLIENT_ID')
 CLIENT_SECRET = os.environ.get('SPOTIFY_CLIENT_SECRET')
 
@@ -20,7 +20,39 @@ access_token = auth_response_data['access_token']
 
 headers = {'Authorization': 'Bearer {token}'.format(token=access_token)}
 
-BASE_URL = 'https://api.spotify.com/v1/recommendations'
-r = requests.get(BASE_URL, headers=headers)
+BASE_URL = 'https://api.spotify.com/v1/'
 
-print(r.json())
+querystring = {"limit":"10","offset":"10"}
+
+user_id = input('Enter user id: ')
+    
+'''
+def playlist_search():
+   
+   i = 0
+
+   '''
+response = requests.get(BASE_URL + 'users/' + user_id + '/playlists', headers=headers,params=querystring).json()
+#print(response.json())
+pl_name=response['items'][0]['name']
+pl_link=response['items'][0]['external_urls']
+
+
+
+print(pl_name, pl_link)
+'''
+    while i < len(response):
+        pl_name=response['items'][0]['name']
+        pl_link=response['items'][0]['external_urls']
+       # print(pl_name, pl_link)
+        i =+ 1
+    else:
+        print("No playlists found for this user")    
+'''
+'''
+def main():
+    playlist_search()
+
+if __name__ == "__main__":
+    main()
+'''
