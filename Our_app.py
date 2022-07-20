@@ -21,7 +21,8 @@ class User(db.Model):
 
 def __repr__(self):
     return f"User('{self.username}', '{self.email}')"
-
+    
+@app.route("/")
 @app.route("/home_page")
 def home():
     return render_template('home_page.html', subtitle='Home Page', text='You are viewing our home page')
