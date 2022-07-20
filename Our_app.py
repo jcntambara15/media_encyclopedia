@@ -10,6 +10,7 @@ proxied = FlaskBehindProxy(app)
 app.config['SECRET_KEY'] = '2ef567fe4204b5cc087050a7d1f492d1'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -27,7 +28,7 @@ def home():
 
 @app.route("/about")
 def about():
-    return render_template('about.html', subtitle='About Page', text='We Media Encyclopedia(The Dream Team)')
+    return render_template('about.html', subtitle='About Page', text='We are Media Encyclopedia(The Dream Team)')
 
 @app.route("/sign_in")
 def sign_in():
