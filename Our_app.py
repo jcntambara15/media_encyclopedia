@@ -15,12 +15,10 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(60), nullable=False)
+    searcher = db.Column(db.String(20), unique=True, nullable=False)
 
 def __repr__(self):
-    return f"User('{self.username}', '{self.email}', {self.password})"
+    return f"User('{self.searcher}')"
 
 @app.route("/home_page")
 def home():
@@ -34,16 +32,16 @@ def about():
 def sign_in():
     return render_template('sign_in.html', subtitle='Sign In Page', text='You can sign in here!')
 
-@app.route("/register", methods=['GET', 'POST'])
-def register():
+@app.route("/search", methods=['GET'])
+def search():
     form = RegistrationForm()
     if form.validate_on_submit(): # checks if entries are valid
         if form.validate_on_submit():
-            user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+            user = User(search=form.search.data)
             db.session.add(user)
             db.session.commit()
-        flash(f'Account created for {form.username.data}!, go to Sign In page to log in', 'success')
+        flash(f'Search generated for {form.search_input.data}!', 'success')
         return redirect(url_for('home')) # if so - send to home page
-    return render_template('register.html', title='Register', form=form)
+    return render_template('search.html', title='Search', form=form)
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
