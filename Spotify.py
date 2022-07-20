@@ -33,13 +33,13 @@ def playlist_search():
 
    '''
 response = requests.get(BASE_URL + 'users/' + user_id + '/playlists', headers=headers,params=querystring).json()
-#print(response.json())
-pl_name=response['items'][0]['name']
-pl_link=response['items'][0]['external_urls']
-
-
-
-print(pl_name, pl_link)
+print(response.json())
+i = 0
+while i < len(reponse):  
+    pl_name=response['items'][0]['name']
+    pl_link=response['items'][0]['external_urls']['spotify']
+    print(pl_name, pl_link)
+    i += 1
 '''
     while i < len(response):
         pl_name=response['items'][0]['name']
