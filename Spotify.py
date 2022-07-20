@@ -22,37 +22,25 @@ headers = {'Authorization': 'Bearer {token}'.format(token=access_token)}
 
 BASE_URL = 'https://api.spotify.com/v1/'
 
-querystring = {"limit":"10","offset":"10"}
+ 
 
-user_id = input('Enter user id: ')
-    
-'''
-def playlist_search():
+user_cont = int(input("Do you wish to get a playlist from your spotify? \n 1.Yes \n 2.No \n"))
+
+
+def playlist_search(user_choice):
+  querystring = {"limit":"10","offset":[user_choice]}  
+  response = requests.get(BASE_URL + 'users/' + user_id + '/playlists', headers=headers,params=querystring).json()
+  pl_name=response['items'][0]['name']
+  pl_link=response['items'][0]['external_urls']
+  print(pl_name, pl_link)
+
    
-   i = 0
 
-   '''
-response = requests.get(BASE_URL + 'users/' + user_id + '/playlists', headers=headers,params=querystring).json()
-print(response.json())
-i = 0
-while i < len(reponse):  
-    pl_name=response['items'][0]['name']
-    pl_link=response['items'][0]['external_urls']['spotify']
-    print(pl_name, pl_link)
-    i += 1
-'''
-    while i < len(response):
-        pl_name=response['items'][0]['name']
-        pl_link=response['items'][0]['external_urls']
-       # print(pl_name, pl_link)
-        i =+ 1
-    else:
-        print("No playlists found for this user")    
-'''
-'''
 def main():
     playlist_search()
 
 if __name__ == "__main__":
-    main()
-'''
+   while user_cont ==  1:
+    user_id = input('Enter user id: ')
+    user_choice = int(input("Choose a random number between 1 and 10:"))
+    playlist_search(user_choice)
