@@ -30,10 +30,10 @@ jobs:
 
       - name: Deploy to Heroku
               env:
-                HEROKU_API_TOKEN: ${{ secrets.Our_secret }}
-                HEROKU_APP_NAME: ${{ secrets.media-encylopedia }}
-              if: github.ref == 'refs/heads/master' && job.status == 'success'
+                HEROKU_API_TOKEN: ${{ secrets.OUR_SECRET }}
+                HEROKU_APP_NAME: ${{ secrets.MEDIA_APP }}
+              if: github.ref == 'refs/heads/main' && job.status == 'success'
               run: |
                 git remote add heroku https://heroku:$Our_secret@git.heroku.com/$media-encylopedia.git
-                git push heroku HEAD:master -f
+                git push heroku HEAD:main -f
 
