@@ -22,10 +22,6 @@ headers = {'Authorization': 'Bearer {token}'.format(token=access_token)}
 
 BASE_URL = 'https://api.spotify.com/v1/'
 
- 
-
-user_cont = int(input("Do you wish to get a playlist from your spotify? \n 1.Yes \n 2.No \n"))
-
 
 def playlist_search(user_choice):
   querystring = {"limit":"10","offset":[user_choice]}  
@@ -34,13 +30,15 @@ def playlist_search(user_choice):
   pl_link=response['items'][0]['external_urls']
   print(pl_name, pl_link)
 
-   
 
 def main():
     playlist_search()
 
+
 if __name__ == "__main__":
+  user_cont = int(input("Do you wish to get a playlist from your spotify? \n 1.Yes \n 2.No \n"))
    while user_cont ==  1:
     user_id = input('Enter user id: ')
     user_choice = int(input("Choose a random number between 1 and 10:"))
     playlist_search(user_choice)
+    user_cont = int(input("Do you wish to get another playlist from your spotify? \n 1.Yes \n 2.No \n"))
