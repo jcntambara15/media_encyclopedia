@@ -18,7 +18,7 @@ def tv_search(tv_input):
     except IndexError:
         print('No shows for this search')
     for i in range(len(df)):
-         print(df.loc[i, :].to_string())
+        print(df.loc[i, :].to_string())
 
 
 '''def tv_list(tv_input):
