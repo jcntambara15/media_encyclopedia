@@ -18,14 +18,12 @@ class User(db.Model):
     searcher = db.Column(db.String(20), unique=True, nullable=False)
 
 def __repr__(self):
-<<<<<<< HEAD
-    return f"User('{self.searcher}')"
+   return f"User('{self.searcher}')"
 
-=======
+
     return f"User('{self.username}', '{self.email}')"
     
 @app.route("/")
->>>>>>> e28889e8d33f21c71c421397d7723eeb9d3ca4c5
 @app.route("/home_page")
 def home():
     return render_template('home_page.html', subtitle='Home Page', text='You are viewing our home page')
