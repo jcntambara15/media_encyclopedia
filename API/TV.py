@@ -18,7 +18,7 @@ def tv_search(tv_input):
         print('No shows for this search')
 
 
-if __name__ == '__main__':
+def main():
     tv_input = str(input('Search for TV Show or "no" to exit when prompted: '))
     while tv_input != ('no' or 'No'):
         tv_search(tv_input)
@@ -26,3 +26,5 @@ if __name__ == '__main__':
         tv_input = str(input())
     for i in range(len(df)):
         print(df.loc[i, :].to_string())
+if __name__ == '__main__':
+    main()

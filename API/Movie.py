@@ -16,8 +16,7 @@ def movie_search(movie_input):
         except IndexError:
             print('No movies for this search')
 
-
-if __name__ == '__main__':
+def main():
     movie_input = str(input('Search for movie or "no" to exit when prompted: '))
     while movie_input != ('no' or 'No'):
         movie_search(movie_input)
@@ -25,3 +24,5 @@ if __name__ == '__main__':
         movie_input = str(input())
     for i in range(len(df)):
         print(df.loc[i, :].to_string())
+if __name__ == '__main__':
+    main()
