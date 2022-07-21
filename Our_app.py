@@ -21,18 +21,52 @@ def __repr__(self):
    return f"User('{self.searcher}')"
 
 
+   return f"User('{self.username}', '{self.email}')"
+    
 @app.route("/")
+def default():
+    return render_template('index.html') 
+
+
+@app.route("/home_page")
 def home():
-    return render_template('index.html', subtitle='Home Page', text='You are viewing our home page')
+    return render_template('home_page.html', subtitle='Home Page', text='You are viewing our home page')
 
 @app.route("/about")
 def about():
-    return render_template('index2.html', subtitle='About Page', text='We are Media Encyclopedia(The Dream Team)')
+    return render_template('about.html', subtitle='About Page', text='We are Media Encyclopedia(The Dream Team)')
 
-@app.route("/search")
+@app.route("/sign_in")
 def sign_in():
-    return render_template('index3.html', subtitle='Sign In Page', text='You can sign in here!')
+    return render_template('sign_in.html', subtitle='Sign In Page', text='You can sign in here!')
 
+@app.route("/register", methods=['GET'])
+def search():
+    form = RegistrationForm()
+    if form.validate_on_submit(): # checks if entries are valid
+        if form.validate_on_submit():
+            user = User(search=form.search.data)
+            db.session.add(user)
+            db.session.commit()
+        flash(f'Search generated for {form.search_input.data}!', 'success')
+        return redirect(url_for('home')) # if so - send to home page
+    # return render_template('register.html', title='Search', form=form)
+  
+        flash(f'Account created for {form.username.data}! go to Sign In page to log in', 'success')
+        return redirect(url_for('home_page')) # if so - send to home page
+    return render_template('register.html', title='Search', form=form)
+    return render_template('register.html', title='Register', form=form)
+
+# Route for handling the login page logic
+@app.route('/sign_in', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            return redirect(url_for('home'))
+    return render_template('login.html', error=error)
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
