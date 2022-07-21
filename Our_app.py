@@ -21,9 +21,13 @@ def __repr__(self):
    return f"User('{self.searcher}')"
 
 
-    return f"User('{self.username}', '{self.email}')"
+   return f"User('{self.username}', '{self.email}')"
     
 @app.route("/")
+def default():
+    return render_template('index.html') 
+
+
 @app.route("/home_page")
 def home():
     return render_template('home_page.html', subtitle='Home Page', text='You are viewing our home page')
@@ -36,7 +40,7 @@ def about():
 def sign_in():
     return render_template('sign_in.html', subtitle='Sign In Page', text='You can sign in here!')
 
-@app.route("/search", methods=['GET'])
+@app.route("/register", methods=['GET'])
 def search():
     form = RegistrationForm()
     if form.validate_on_submit(): # checks if entries are valid
@@ -46,10 +50,11 @@ def search():
             db.session.commit()
         flash(f'Search generated for {form.search_input.data}!', 'success')
         return redirect(url_for('home')) # if so - send to home page
-    return render_template('search.html', title='Search', form=form)
+    # return render_template('register.html', title='Search', form=form)
   
         flash(f'Account created for {form.username.data}! go to Sign In page to log in', 'success')
         return redirect(url_for('home_page')) # if so - send to home page
+    return render_template('register.html', title='Search', form=form)
     return render_template('register.html', title='Register', form=form)
 
 # Route for handling the login page logic
