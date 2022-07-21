@@ -11,13 +11,18 @@
     * ESPN -> http://www.espn.com/apis/devcenter/docs/
     * The Movie Database -> https://developers.themoviedb.org/3/getting-started/introduction
   * pip install coverage (for testing)
-  * import some stuff (change later)
+  * Imports
+    * Flask
+    * requests
+    * json
+    * pandas as pd
+    * sqalchemy as db
 * **How to Run**
   * Open the website
-  * Scroll to the tab you want (Music, Sports, or Movies)
+  * Scroll to the tab you want (Music, Sports, Movies, or TV shows)
   * Run the associated program
   * Observe a recommended piece of media for your preferred topic!
 * **Description**
   * Program interfaces with 3 APIs (Spotify, ESPN, and The Movie Database) in order to give
   the user tailored recommendations for their media. This could be a song, a movie, a sport,
-  or even a combination of them all!
+  a TV show, or even a combination of them all!
