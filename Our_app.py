@@ -24,18 +24,22 @@ def __repr__(self):
    return f"User('{self.username}', '{self.email}')"
     
 @app.route("/")
-def default():
-    return render_template('index.html') 
+@app.route("/home")
+def home():
+    return render_template('home.html') 
 
 
 @app.route("/about")
-def home():
-    return render_template('index2.html', subtitle='About Page', text='You are viewing our about page')
+def about():
+    return render_template('about.html', subtitle='About Page', text='You are viewing our about page')
 
 @app.route("/search")
-def about():
-    return render_template('index3.html', subtitle='Search Page', text='We are Media Encyclopedia(The Dream Team)')
+def search():
+    return render_template('search.html', subtitle='Search Page', text='We are Media Encyclopedia(The Dream Team)')
 
+@app.route("/find")
+def find():
+    return render_template('find.html', subtitle='Search Page', text='Please choose the media genre and proceed to search')
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")

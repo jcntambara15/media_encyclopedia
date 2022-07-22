@@ -1,0 +1,43 @@
+
+<!-- {% extends "layout.html" %} -->
+{% block content %}
+    <h2>{{ subtitle }}</h2>
+    <p>{{ text }}</p>
+    <head>
+       <title>Global</title>
+       <meta charset="utf-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="description" content="HTML5 website template">
+       <meta name="keywords" content="global, template, html, sass, jquery">
+       <meta name="author" content="Bucky Maler">
+       <link rel="stylesheet" href="static/assets/css/main.css">
+   </head>
+
+ <header class="header">
+     <a class="header--logo" href="#0">
+         <img src="static/assets/img/teamLogo.jpg" alt="Logo" style="width:10%; height:10%;">
+         <p>Media Encyclopedia</p>
+     </a>
+     <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
+ </header>
+   <body>
+
+ <div class="input-group mb-3">
+  <input type="text" class="form-control" aria-label="Text input with dropdown button">
+  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Select Your Choice</button>
+  <!-- <select name="Select Your Choice" id="choice"> -->
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><a class="dropdown-item" href="#">Music</a></li>
+    <li><a class="dropdown-item" href="#">Movies</a></li>
+    <li><a class="dropdown-item" href="#">TV</a></li>
+    <li><a class="dropdown-item" href="#">Sports</a></li>
+  </ul>
+  <!-- </select> -->
+
+</div>
+  <button class="btn btn-primary">Search</button>
+  </body>
+
+{% endblock content %}
+
